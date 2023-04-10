@@ -3,7 +3,7 @@ import ExpenseDate from "../ExpenseDate/ExpenseDate";
 import "./ExpenseItem.css";
 
 export default function ExpenseItemComponent(props: any) {
-  const [title, setTitle] = useState(props.title);
+  // const [title, setTitle] = useState(props.title);
 
   // const updateTitle=()=>{
   //   setTitle('Updated!');
@@ -14,7 +14,7 @@ export default function ExpenseItemComponent(props: any) {
     <div className="expense-item">
       <ExpenseDate date={props.date} />
       <div className="expense-item__description">
-        <h2>{title}</h2>
+        <h2>{props.title}</h2>
         <div className="expense-item__price">${props.amount}</div>
         {/* <button onClick={updateTitle}>Update</button> */}
       </div>
