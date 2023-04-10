@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import ExpenseItemComponent from './components/ExpenseItem/ExpenseItem';
 import ExpenseHolderComponent from './components/ExpenseHolder';
+import NewExpense from './components/NewExpense/NewExpense';
 
 function App() {
   const expenses = [
@@ -27,7 +27,8 @@ function App() {
   ];
   return (
     <div>
-    <h2>Expense Report</h2>
+      <NewExpense/>
+    {/* <h2>Expense Report</h2> */}
     {/* <ExpenseItemComponent
       title={expenses[0].title}
       amount={expenses[0].amount}
