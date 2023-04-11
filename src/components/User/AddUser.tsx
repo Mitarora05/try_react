@@ -9,15 +9,16 @@ interface IAddUser extends React.PropsWithChildren{
 
 const AddUser: React.FC<IAddUser> = ({onAddUser}) => {
   const [name, setName] = useState("");
-  const [age, setAge] = useState("");
+  const [age, setAge] = useState(0);
 
   const addUserHandler = (event: any) => {
     event.preventDefault();
     // custom validation 
-    if(name.trim().length === 0 || age.trim().length === 0 ) {return;}
+    if(name.trim().length === 0 || age === 0 ) {return;}
     if(+age  < 1){return;}
+    onAddUser(name,age);
     setName("");
-    setAge("");
+    setAge(0);
   };
 
   const nameChangeHandler = (event: any) => {
