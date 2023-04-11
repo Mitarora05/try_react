@@ -16,14 +16,14 @@ type ChartProps = {
 const Chart: React.FC<ChartProps> = (props) => {
   return (
     <div className="chart">
-      {props.dataPoints.map((dataPoint: DataPoint) => (
+      {/* {props.dataPoints.map((dataPoint: DataPoint) => (
         <ChartBar 
           key={dataPoint.label}
           value={dataPoint.value}
           maxValue={null}
           label={dataPoint.label}
         />
-      ))}
+      ))} */}
     </div>
   );
 };
