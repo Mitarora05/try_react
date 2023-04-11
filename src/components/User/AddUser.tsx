@@ -9,6 +9,9 @@ const AddUser = () => {
 
   const addUserHandler = (event: any) => {
     event.preventDefault();
+    // custom validation 
+    if(name.trim().length === 0 || age.trim().length === 0 ) {return;}
+    if(+age  < 1){return;}
     setName("");
     setAge("");
   };
