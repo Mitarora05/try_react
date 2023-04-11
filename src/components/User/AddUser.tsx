@@ -3,7 +3,11 @@ import classes from "./AddUser.module.css";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 
-const AddUser = () => {
+interface IAddUser extends React.PropsWithChildren{
+    onAddUser: (userName: string,userAge: number) => void;
+}
+
+const AddUser: React.FC<IAddUser> = ({onAddUser}) => {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
 
