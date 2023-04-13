@@ -1,6 +1,6 @@
 import React from 'react';
 
-import classes from './Movie.module.css';
+import classes from './Movies.module.css';
 
 interface MovieProps {
   title: string;
