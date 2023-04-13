@@ -5,6 +5,7 @@ import classes from "./Modal.module.css";
 
 interface IModalProps extends React.PropsWithChildren {
   //   children: React.ReactNode;
+  onClose: () => void;
 }
 
 interface IModalOverlayProps extends React.PropsWithChildren {
