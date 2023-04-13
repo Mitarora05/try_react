@@ -1,26 +1,40 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from './MealItem.module.css';
 import MealItemForm from "./MealItemForm";
+import CartContext from "../../../store/cart-context";
 
-interface IMealItemProps {
+interface MealItemProps {
   id: string;
-  price: number | undefined;
-  name?: string;
-  description?: string;
+  name: string;
+  description: string;
+  price: number;
 }
 
-const MealItem: React.FC<IMealItemProps> = ({ id, price, name, description }) => {
-  const formattedPrice = price ? `$${price.toFixed(2)}` : '';
+const MealItem: React.FC<MealItemProps> = (props) => {
+  const cartCtx = useContext(CartContext);
+
+  const price = `$${props.price.toFixed(2)}`;
+
+  const addToCartHandler = (amount: number) => {
+    cartCtx.addItem({
+      id: props.id,
+      name: props.name,
+      amount: amount,
+      price: props.price,
+    });
+  };
 
   return (
     <li className={classes.meal}>
       <div>
-        <h3>{name}</h3>
-        <div className={classes.description}>{description}</div>
-        <div className={classes.price}>{formattedPrice}</div>
+        <h3>{props.name}</h3>
+        <div className={classes.description}>{props.description}</div>
+        <div className={classes.price}>{price}</div>
       </div>
       <div>
-        <MealItemForm id={id} />
+        {/* Assuming MealItemForm has its own props */}
+        {/* Make sure to update this based on the actual props */}
+        <MealItemForm id={props.id} onAddToCart={addToCartHandler} />
       </div>
     </li>
   );
