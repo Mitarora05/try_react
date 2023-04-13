@@ -5,13 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import NewApp from './NewApp';
 import FoodApp from './foodOrder/fooComponents/FoodApp';
+import MoviesApp from './http-handson/MoviesApp';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <FoodApp />
+    {/* <FoodApp /> */}
+    <MoviesApp />
   </React.StrictMode>
 );
 
