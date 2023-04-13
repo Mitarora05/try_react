@@ -7,14 +7,13 @@ interface HeaderCartButtonProps {
   onShowCart: () => void;
 }
 
-const HeaderCartButton: React.FC<HeaderCartButtonProps> = (props) => {
+const HeaderCartButton: React.FC<HeaderCartButtonProps> = ({ onShowCart }) => {
   const [btnIsHighlighted, setBtnIsHighlighted] = useState(false);
-
   const cartCtx = useContext(CartContext);
 
   const { items } = cartCtx;
 
-  const numberOfCartItems = cartCtx.items.reduce((curNumber, item) => {
+  const numberOfCartItems = items.reduce((curNumber, item) => {
     return curNumber + item.amount;
   }, 0);
 
@@ -35,9 +34,8 @@ const HeaderCartButton: React.FC<HeaderCartButtonProps> = (props) => {
     };
   }, [items]);
 
-
   return (
-    <button className={btnClasses} onClick={props.onShowCart}>
+    <button className={btnClasses} onClick={onShowCart}>
       <span className={classes.icon}>
         <CartIcon />
       </span>
