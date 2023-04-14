@@ -7,6 +7,7 @@ import NewApp from './NewApp';
 import FoodApp from './foodOrder/fooComponents/FoodApp';
 import MoviesApp from './http-handson/MoviesApp';
 import CustomHooks from './customHooks-handson/CustomHooks';
+import TaskApp from './customHooks-handson/TaskApp';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,7 +16,8 @@ root.render(
   <React.StrictMode>
     {/* <FoodApp /> */}
     {/* <MoviesApp /> */}
-    <CustomHooks />
+    {/* <CustomHooks /> */}
+    <TaskApp />
   </React.StrictMode>
 );
 
