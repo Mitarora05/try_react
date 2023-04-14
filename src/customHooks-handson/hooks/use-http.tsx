@@ -36,7 +36,7 @@ const useHttp = (requestConfig: RequestConfig, applyData: ApplyData): HttpResult
       const data = await response.json();
       applyData(data);
     } catch (err) {
-      // setError(err.message || 'Something went wrong!');
+    //   setError(err.message || 'Something went wrong!');
     }
     setIsLoading(false);
   };
