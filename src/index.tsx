@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import NewApp from './NewApp';
 import FoodApp from './foodOrder/fooComponents/FoodApp';
 import MoviesApp from './http-handson/MoviesApp';
+import CustomHooks from './customHooks-handson/CustomHooks';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,7 +14,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     {/* <FoodApp /> */}
-    <MoviesApp />
+    {/* <MoviesApp /> */}
+    <CustomHooks />
   </React.StrictMode>
 );
 
