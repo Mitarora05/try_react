@@ -17,7 +17,7 @@ function TaskApp() {
     setError(null);
     try {
       const response = await fetch(
-        "https://react-http-6b4a6.firebaseio.com/tasks.json"
+        "https://react-hooks-8e66f-default-rtdb.firebaseio.com/tasks.json"
       );
 
       if (!response.ok) {
