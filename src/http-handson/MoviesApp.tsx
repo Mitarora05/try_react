@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import MoviesList from "./movies/MoviesList";
 import "./MoviesApp.css";
 
@@ -21,7 +21,34 @@ function MoviesApp() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  async function fetchMoviesHandler() {
+  // async function fetchMoviesHandler() {
+  //   setIsLoading(true);
+  //   setError(null);
+  //   try{
+  //     const response = await fetch("https://swapi.dev/api/films/");
+  //   const data = await response.json();
+
+  //   if(!response.ok) {
+  //     throw new Error('Something went wrong fetching movies')
+  //   }
+
+  //   const transformedMovies = data.results.map((movieData: any) => {
+  //     return {
+  //       id: movieData.episode_id,
+  //       title: movieData.title,
+  //       openingText: movieData.opening_crawl,
+  //       releaseDate: movieData.release_date,
+  //     };
+  //   });
+  //   setMovies(transformedMovies);
+    
+  //   }catch(error: any){
+  //     setError(error.message);
+  //   }
+  //   setIsLoading(false);
+  // }
+
+  const fetchMoviesHandler = useCallback ( async () => {
     setIsLoading(true);
     setError(null);
     try{
@@ -46,7 +73,11 @@ function MoviesApp() {
       setError(error.message);
     }
     setIsLoading(false);
-  }
+  }, []);
+
+  useEffect (() => {
+    fetchMoviesHandler();
+  },[fetchMoviesHandler]);
 
   return (
     <React.Fragment>
