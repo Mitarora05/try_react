@@ -1,32 +1,30 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 interface RequestConfig {
   url: string;
-  method: string;
-  headers: { [key: string]: string };
-  body?: object;
+  method?: string;
+  headers?: Record<string, string>;
+  body?: any;
 }
-
-type ApplyData = (data: any) => void;
 
 interface HttpResult {
   isLoading: boolean;
-  error: any;
-  sendRequest: () => Promise<void>;
+  error: string | null;
+  sendRequest: (requestConfig: RequestConfig, applyData: (data: any) => void) => Promise<void>;
 }
 
-const useHttp = (requestConfig: RequestConfig, applyData: ApplyData): HttpResult => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+const useHttp = (): HttpResult => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const sendRequest = async (): Promise<void> => {
+  const sendRequest = useCallback(async (requestConfig: RequestConfig, applyData: (data: any) => void) => {
     setIsLoading(true);
     setError(null);
     try {
       const response = await fetch(requestConfig.url, {
-        method: requestConfig.method,
-        headers: requestConfig.headers,
-        body: JSON.stringify(requestConfig.body),
+        method: requestConfig.method ? requestConfig.method : 'GET',
+        headers: requestConfig.headers ? requestConfig.headers : {},
+        body: requestConfig.body ? JSON.stringify(requestConfig.body) : null,
       });
 
       if (!response.ok) {
@@ -39,7 +37,7 @@ const useHttp = (requestConfig: RequestConfig, applyData: ApplyData): HttpResult
     //   setError(err.message || 'Something went wrong!');
     }
     setIsLoading(false);
-  };
+  }, []);
 
   return {
     isLoading,

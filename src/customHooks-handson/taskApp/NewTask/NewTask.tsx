@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import Section from '../UI/Section';
 import TaskForm from './TaskForm';
+import useHttp from '../../hooks/use-http';
+// import useHttp from '../../TaskApp';
+
+// import React from 'react';
+// import  useHttp, RequestConfig  from '../../hooks/use-http'; // assuming useHttp is defined in a separate file
 
 interface Task {
   id: string;
   text: string;
+}
+interface RequestConfig {
+  url: string;
+  method?: string;
+  headers?: Record<string, string>;
+  body?: any;
 }
 
 interface NewTaskProps {
@@ -12,38 +23,26 @@ interface NewTaskProps {
 }
 
 const NewTask: React.FC<NewTaskProps> = (props) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const { isLoading, error, sendRequest: sendTaskRequest } = useHttp();
+
+  const createTask = (taskText: string, taskData: { name: string }) => {
+    const generatedId = taskData.name; // firebase-specific => "name" contains generated id
+    const createdTask = { id: generatedId, text: taskText };
+
+    props.onAddTask(createdTask);
+  };
 
   const enterTaskHandler = async (taskText: string) => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(
-        'https://react-hooks-8e66f-default-rtdb.firebaseio.com/tasks.json',
-        {
-          method: 'POST',
-          body: JSON.stringify({ text: taskText }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+    const requestConfig: RequestConfig = {
+      url: 'https://react-hooks-8e66f-default-rtdb.firebaseio.com/tasks.json',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: { text: taskText },
+    };
 
-      if (!response.ok) {
-        throw new Error('Request failed!');
-      }
-
-      const data = await response.json();
-
-      const generatedId = data.name; // firebase-specific => "name" contains generated id
-      const createdTask = { id: generatedId, text: taskText };
-
-      props.onAddTask(createdTask);
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong!');
-    }
-    setIsLoading(false);
+    sendTaskRequest(requestConfig, createTask.bind(null, taskText));
   };
 
   return (
