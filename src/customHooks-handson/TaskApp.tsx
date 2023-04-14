@@ -37,12 +37,12 @@ const TaskApp = () => {
   return (
     <React.Fragment>
       <NewTask onAddTask={taskAddHandler} />
-      <Tasks
+      {/* <Tasks
         items={tasks}
         loading={isLoading}
         error={error !== null}
         onFetch={fetch}
-      />
+      /> */}
     </React.Fragment>
   );
 }
